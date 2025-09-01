@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caught by Serendipitous - Knowledge Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000000;
+            color: #e6edf3;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: #1a0000;
+            border-bottom: 1px solid #330000;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 0.35rem;
+            color: #ff4444;
+            white-space: pre;
+            font-family: 'Courier New', monospace;
+            line-height: 1;
+            opacity: 1;
+        }
+
+        .logo {
+            font-size: 0.25rem;
+            font-weight: bold;
+            color: #ff4444;
+            white-space: pre;
+            font-family: 'Courier New', monospace;
+            line-height: 1.0;
+            letter-spacing: 0.2px;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 8px 12px;
+            background: #1a0000;
+            border: 1px solid #330000;
+            border-radius: 6px;
+            color: #e6edf3;
+            font-family: inherit;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #ff4444;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 6px 16px;
+            border: 1px solid #330000;
+            border-radius: 6px;
+            background: #1a0000;
+            color: #e6edf3;
+            text-decoration: none;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #330000;
+            border-color: #ff4444;
+        }
+
+        .btn-primary {
+            background: #cc0000;
+            border-color: #cc0000;
+        }
+
+        .btn-primary:hover {
+            background: #ff0000;
+            border-color: #ff0000;
+        }
+
+        /* Main Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #1a0000;
+            border: 1px solid #330000;
+            border-radius: 6px;
+            padding: 1rem;
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h3 {
+            color: #ff4444;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-list li {
+            margin-bottom: 8px;
+        }
+
+        .nav-list a {
+            color: #7d8590;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .nav-list a:hover,
+        .nav-list a.active {
+            color: #e6edf3;
+            background: #1a0000;
+        }
+
+        .stats {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #7d8590;
+        }
+
+        .stats div {
+            margin-bottom: 4px;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #000000;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #330000;
+        }
+
+        .content-logo {
+            color: #ff4444;
+            font-size: 0.8rem;
+            white-space: pre;
+            font-family: 'Courier New', monospace;
+            line-height: 1;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-title {
+            color: #ff4444;
+            font-size: 0.5rem;
+            white-space: pre;
+            font-family: 'Courier New', monospace;
+            line-height: 1.1;
+            letter-spacing: 0.3px;
+            margin-bottom: 2rem;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .sort-btn {
+            background: none;
+            border: none;
+            color: #7d8590;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .sort-btn:hover,
+        .sort-btn.active {
+            color: #e6edf3;
+            background: #1a0000;
+        }
+
+        /* Content Cards */
+        .content-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .content-card {
+            background: #1a0000;
+            border: 1px solid #330000;
+            border-radius: 6px;
+            padding: 1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .content-card:hover {
+            border-color: #ff4444;
+            background: #330000;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            color: #ff4444;
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: #7d8590;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: #1a0000;
+            color: #7d8590;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            border: 1px solid #330000;
+        }
+
+        .card-preview {
+            margin-top: 0.5rem;
+            color: #e6edf3;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .card-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .action-link {
+            color: #7d8590;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .action-link:hover {
+            color: #ff4444;
+        }
+
+        /* Modal for viewing content */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a0000;
+            border: 1px solid #330000;
+            border-radius: 6px;
+            padding: 2rem;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            width: 90%;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #7d8590;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #e6edf3;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+                position: static;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .search-container {
+                margin: 0;
+                max-width: none;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-container">
+                <div class="logo-icon">⠀⠀⠀⢀⠀⠀⠀⠀⠀⢠⡆⠀⠀⠀⠀⠀⡀⠀⠀⠀
+⠀⠀⠈⣷⣄⠀⠀⠀⣾⣷⠀⠀⠀⣠⣾⠃⠀⠀⠀
+⠀⠀⠀⢿⠿⠃⠀⠀⠉⠉⠁⠀⠐⠿⡿⠀⠀⠀⠀
+⠀⠀⠀⠀⣀⣠⣤⣤⣶⣶⣤⣤⣄⣀⡀⠀⠀⠀⠀
+⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀
+⠀⣠⣶⣿⡿⣿⣿⠋⠉⠙⢿⣿⡿⣿⣷⣦⡀⠀⠀
+⢀⣼⣿⠟⠁⣿⠏⠀⣤⣤⠀⢻⣿⠙⢿⣿⣦⠀⠀
+⣿⣿⡟⠁⠀⣿⠀⠀⣿⣿⠀⠈⣿⠀⠙⣿⣿⣷⡄
+⠻⣿⣦⣄⠀⣿⣆⠀⠉⠉⠀⣸⣿⢀⣾⣿⣿⠟⠁
+⠀⠻⣿⣿⣶⣿⣿⣦⣄⢀⣾⣿⣿⣿⣿⡿⠋⠀⠀
+⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⠀⠀⠀
+⠀⠀⠀⠈⠉⠛⠛⠿⠿⠿⠛⠋⠉⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢰⣷⡦⠀⢀⣀⣀⠀⢴⣾⡇⠀⠀⠀⠀⠀
+⠀⠀⠀⣸⠟⠁⠀⠘⣿⡇⠀⠙⢷⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠁⠀⠀⠀⠀⠻⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀</div>
+                <div class="logo">_______  _______           _______          _________         ______                    _______  _______  _______  _______           _____  _________ _______ __________________ _______           _______ 
+(  ____ \(  ___  )|\     /|(  ____ \|\     /|\__   __/        (  __ \ |\     /|        (  ____ \(  ____ \(  ____ )(  ____ \( (    /|(  _  \ \__   __/(  __ )\__   __/\__   __/(  _  )|\     /|(  ____ \
+| (    \/| (   ) || )   ( || (    \/| )   ( |   ) (           | (   ) )( \   / )        | (    \/| (    \/| (    )|| (    \/|  \  ( || (  \  )   ) (   | (    )|   ) (      ) (   | (   ) || )   ( || (    \/
+| |      | (___) || |   | || |      | (___) |   | |           | (__/ /  \ (_) /         | (_____ | (__    | (____)|| (__    |   \ | || |   ) |   | |   | (____)|   | |      | |   | |   | || |   | || (_____ 
+| |      |  ___  || |   | || | ____ |  ___  |   | |           |  __ (    \   /          (_____  )|  __)   |     __)|  __)   | (\ \) || |   | |   | |   |  _____)   | |      | |   | |   | || |   | |(_____  )
+| |      | (   ) || |   | || | \_  )| (   ) |   | |           | (  \ \    ) (                 ) || (      | (\ (   | (      | | \   || |   ) |   | |   | (         | |      | |   | |   | || |   | |      ) |
+| (____/\| )   ( || (___) || (___) || )   ( |   | |           | )___) )   | |           /\____) || (____/\| ) \ \__| (____/\| )  \  || (__/  )   | |   | )      ___) (___   | |   | (___) || (___) |/\____) |
+(_______/|/     \|(_______)(_______)|/     \|   )_(           |/ \___/    \_/           \_______)(_______/|/   \__/(_______/|/    )_)(______/    )_(   |/       \_______/   )_(   (_______)(_______)\_______))</div>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search Pedos" id="searchBox">
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; min-height: 200px;">
+                <h3 style="margin-bottom: 1rem;">Update:</h3>
+                <div style="color: #ff4444; font-weight: bold;">
+                    Serendipitous caught your dumbass... your whole career is over
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="content-header">
+                <div class="content-logo">⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⢠⡆⠀⠀⠀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⣷⣄⠀⠀⠀⠀⣾⣷⠀⠀⠀⠀⣠⣾⠃⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢿⠿⠃⠀⠀⠀⠉⠉⠁⠀⠀⠐⠿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣶⣶⣶⣤⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⣠⣶⣿⣿⡿⣿⣿⣿⡿⠋⠉⠀⠀⠉⠙⢿⣿⣿⡿⣿⣿⣷⣦⡀⠀⠀⠀
+⠀⢀⣼⣿⣿⠟⠁⢠⣿⣿⠏⠀⠀⢠⣤⣤⡀⠀⠀⢻⣿⣿⡀⠙⢿⣿⣿⣦⠀⠀
+⣰⣿⣿⡟⠁⠀⠀⢸⣿⣿⠀⠀⠀⢿⣿⣿⡟⠀⠀⠈⣿⣿⡇⠀⠀⠙⣿⣿⣷⡄
+⠈⠻⣿⣿⣦⣄⠀⠸⣿⣿⣆⠀⠀⠀⠉⠉⠀⠀⠀⣸⣿⣿⠃⢀⣤⣾⣿⣿⠟⠁
+⠀⠀⠈⠻⣿⣿⣿⣶⣿⣿⣿⣦⣄⠀⠀⠀⢀⣠⣾⣿⣿⣿⣾⣿⣿⡿⠋⠁⠀⠀
+⠀⠀⠀⠀⠀⠙⠻⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠛⠿⠿⠿⠿⠿⠿⠛⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢰⣷⡦⠀⠀⠀⢀⣀⣀⠀⠀⠀⢴⣾⡇⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⣸⠟⠁⠀⠀⠀⠘⣿⡇⠀⠀⠀⠀⠙⢷⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠻⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀</div>
+                <h1 class="content-title">_________          _______  _______  _______          _______  _______           _______          _________     
+\__   __/|\     /|(  _  )(  ____ \(  ____ \        (  ____ \(  ___  )|\     /|(  ____ \|\     /|\__   __/     
+   ) (   | )   ( || (   ) || (    \/| (    \/        | (    \/| (   ) || )   ( || (    \/| )   ( |   ) (      _ 
+   | |   | (___) || |   | || (_____ | (__            | |      | (___) || |   | || |      | (___) |   | |     (_)
+   | |   |  ___  || |   | |(_____  )|  __)           | |      |  ___  || |   | || | ____ |  ___  |   | |        
+   | |   | (   ) || |   | |      ) || (              | |      | (   ) || |   | || | \_  )| (   ) |   | |      _ 
+   | |   | )   ( || (___) |/\____) || (____/\        | (____/\| )   ( || (___) || (___) || )   ( |   | |     (_)
+   )_(   |/     \|(_______)\_______)(_______/        (_______/|/     \|(_______)(_______)|/     \|   )_(</h1>
+            </div>
+
+            <div class="content-list">
+                <!-- Content cards will be added here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for viewing full content -->
+    <div id="contentModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody">
+                <!-- Content will be dynamically loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchBox = document.getElementById('searchBox');
+        const contentCards = document.querySelectorAll('.content-card');
+
+        searchBox.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            contentCards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const preview = card.querySelector('.card-preview').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
+                
+                if (title.includes(searchTerm) || preview.includes(searchTerm) || tags.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Sort functionality
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        sortButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                sortButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                // Sorting logic would go here
+            });
+        });
+
+        // Modal functionality
+        function openModal(modalId) {
+            const modal = document.getElementById('contentModal');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Sample content - in a real app, this would load actual content
+            const content = {
+                modal1: '<h2>Getting Started with React Hooks</h2><p>React Hooks are a powerful feature that allows you to use state and lifecycle methods in functional components...</p>',
+                modal2: '<h2>API Documentation Template</h2><p>This template provides a comprehensive structure for documenting your REST APIs...</p>',
+                modal3: '<h2>CSS Grid Layout Examples</h2><p>CSS Grid is a powerful layout system that makes it easy to create complex responsive layouts...</p>',
+                modal4: '<h2>Database Optimization Tips</h2><p>Database performance is crucial for application speed and user experience...</p>'
+            };
+            
+            modalBody.innerHTML = content[modalId] || '<p>Content not found.</p>';
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('contentModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('contentModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-list a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                // Filter content based on category
+            });
+        });
+    </script>
+</body>
+</html>
