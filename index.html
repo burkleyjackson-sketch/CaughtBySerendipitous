@@ -252,6 +252,41 @@
             background: #330000;
         }
 
+        /* Mario Juan specific styling */
+        .mario-juan-bar {
+            background: #1a0000;
+            border: 2px solid #ff4444;
+        }
+
+        .mario-juan-bar:hover {
+            background: #2a0000;
+            border-color: #ff6666;
+        }
+
+        .mario-juan-ascii {
+            color: #ff4444;
+            font-size: 0.6rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .mario-juan-description {
+            background: #0a0000;
+            border: 1px solid #330000;
+            border-radius: 4px;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            min-height: 60px;
+        }
+
+        .mario-juan-description p {
+            color: #cccccc;
+            font-style: italic;
+            margin: 0;
+        }
+
         .card-header {
             display: flex;
             justify-content: space-between;
@@ -447,7 +482,24 @@
             </div>
 
             <div class="content-list">
-                <!-- Content cards will be added here -->
+                <!-- Mario Juan Profile Bar -->
+                <div class="content-card mario-juan-bar" onclick="openModal('mario-juan')">
+                    <div class="card-header">
+                        <div class="mario-juan-ascii">
+   __  ___           *                  *_                
+  /  |/  /___ ______(_)___             / /_  ______ _____ 
+ / /|_/ / __ `/ ___/ / __ \       __  / / / / / __ `/ __ \
+/ /  / / /_/ / /  / / /_/ /      / /_/ / /_/ / /_/ / / / /
+/_/  /_/\__,_/_/  /_/\____/       \____/\__,_/\__,_/_/ /_/</div>
+                        <div class="card-meta">Click to view profile</div>
+                    </div>
+                    <div class="card-preview mario-juan-description">
+                        <!-- Quick description goes here -->
+                        <p>Twenty-One year old, Mexican, National Autonomous University of Mexico</p>
+                    </div>
+                </div>
+                
+                <!-- Other content cards will be added here -->
             </div>
         </main>
     </div>
@@ -471,8 +523,8 @@
             const searchTerm = this.value.toLowerCase();
             
             contentCards.forEach(card => {
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const preview = card.querySelector('.card-preview').textContent.toLowerCase();
+                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                const preview = card.querySelector('.card-preview')?.textContent.toLowerCase() || '';
                 const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase()).join(' ');
                 
                 if (title.includes(searchTerm) || preview.includes(searchTerm) || tags.includes(searchTerm)) {
@@ -500,6 +552,7 @@
             
             // Sample content - in a real app, this would load actual content
             const content = {
+                'mario-juan': '<h2 style="color: #ff4444;">Mario Juan Profile</h2><div style="font-family: \'Courier New\', monospace; white-space: pre; color: #ff4444; font-size: 0.8rem; margin: 1rem 0;">   __  ___           *                  *_                \n  /  |/  /___ ______(_)___             / /_  ______ _____ \n / /|_/ / __ `/ ___/ / __ \\       __  / / / / / __ `/ __ \\\n/ /  / / /_/ / /  / / /_/ /      / /_/ / /_/ / /_/ / / / /\n/_/  /_/\\__,_/_/  /_/\\____/       \\____/\\__,_/\\__,_/_/ /_/</div><p style="color: #e6edf3; line-height: 1.6;">Full profile information for Mario Juan would be displayed here. You can add biographical information, achievements, contact details, or any other relevant content.</p>',
                 modal1: '<h2>Getting Started with React Hooks</h2><p>React Hooks are a powerful feature that allows you to use state and lifecycle methods in functional components...</p>',
                 modal2: '<h2>API Documentation Template</h2><p>This template provides a comprehensive structure for documenting your REST APIs...</p>',
                 modal3: '<h2>CSS Grid Layout Examples</h2><p>CSS Grid is a powerful layout system that makes it easy to create complex responsive layouts...</p>',
